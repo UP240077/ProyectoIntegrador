@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t("register_title") }}{% endblock %}
+
+{% block content %}
+<div class="card center">
+    <h1>📝 {{ t("register_title") }}</h1>
+
+    <form method="POST">
+        <div class="form-group">
+            <label>{{ t("register_name") }}</label><br>
+            <input type="text" name="nombre" required>
+        </div>
+
+        <div class="form-group">
+            <label>{{ t("register_email") }}</label><br>
+            <input type="email" name="correo" required>
+        </div>
+
+        <div class="form-group">
+            <label>{{ t("register_password") }}</label><br>
+            <input type="password" name="password" required>
+        </div>
+
+        <button type="submit">{{ t("register_button") }}</button>
+    </form>
+
+    <p>{{ t("register_yes_account") }}</p>
+    <a href="{{ url_for('login') }}">
+        <button type="button">{{ t("register_go_login") }}</button>
+    </a>
+</div>
+{% endblock %}

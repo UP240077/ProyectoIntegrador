@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t("sales_title") }}{% endblock %}
+
+{% block content %}
+<div class="card center">
+    <h1>🧾 {{ t("sales_title") }}</h1>
+    <p>{{ t("sales_desc") }}</p>
+
+    <form method="POST">
+        <div class="form-group">
+            <label>{{ t("sales_label_desc") }}</label><br>
+            <input type="text" name="descripcion" placeholder="Ej. Compra de materiales" required>
+        </div>
+
+        <div class="form-group">
+            <label>{{ t("sales_label_total") }}</label><br>
+            <input type="number" step="0.01" name="total" placeholder="Ej. 1200.50" required>
+        </div>
+
+        <button type="submit">✅ {{ t("btn_register_sale") }}</button>
+    </form>
+</div>
+
+<div class="card center">
+    <h2>📋 {{ t("sales_list_title") }}</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ t("sales_table_id") }}</th>
+                <th>{{ t("sales_table_desc") }}</th>
+                <th>{{ t("sales_table_total") }}</th>
+                <th>{{ t("sales_table_date") }}</th>
+                <th>{{ t("sales_table_action") }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if ventas %}
+                {% for v in ventas %}
+                <tr>
+                    <td>{{ v[0] }}</td>
+                    <td>{{ v[1] }}</td>
+                    <td>${{ "%.2f"|format(v[2]) }}</td>
+                    <td>{{ v[3] }}</td>
+                    <td>
+                        <form action="{{ url_for('eliminar_venta', id=v[0]) }}"
+                              method="POST" onsubmit="return confirmarEliminacion()">
+                            <button type="submit" style="background:#dc2626;">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="5">{{ t("sales_none") }}</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+function confirmarEliminacion() {
+    return confirm('{{ t("confirm_delete_sale") }}');
+}
+</script>
+{% endblock %}

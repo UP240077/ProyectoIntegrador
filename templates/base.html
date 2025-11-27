@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SiVenta{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .flash {
+            background: #2563eb;
+            color: white;
+            padding: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <a href="/">{{ t("menu_home") }}</a>
+        <a href="/productos">{{ t("menu_products") }}</a>
+        <a href="/ventas">{{ t("menu_sales") }}</a>
+        <a href="/reportes">{{ t("menu_reports") }}</a>
+        <a href="/configuracion">{{ t("menu_settings") }}</a>
+
+        <hr style="width:90%; border-color:#374151; margin: 15px 0;">
+
+{% if session.get("usuario_id") %}
+    <p style="color:white; margin-top: 25px; font-size: 15px;">
+        👤 {{ session["usuario_nombre"] }}
+    </p>
+{% else %}
+    <a href="{{ url_for('login') }}" style="color:#93c5fd;">Iniciar sesión</a>
+    <a href="{{ url_for('registro') }}" style="color:#a7f3d0;">Crear cuenta</a>
+{% endif %}
+
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="content">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash">{{ messages[0] }}</div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

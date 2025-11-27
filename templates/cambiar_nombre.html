@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Cambiar nombre{% endblock %}
+
+{% block content %}
+<div class="card center">
+    <h1>✏️ Cambiar nombre</h1>
+    <p>Escribe el nuevo nombre que quieres mostrar en tu cuenta.</p>
+
+    <form method="POST">
+        <div class="form-group">
+            <label>Nuevo nombre:</label><br>
+            <input type="text" name="nombre" required
+                   value="{{ session.get('usuario_nombre', '') }}">
+        </div>
+
+        <button type="submit">💾 Guardar cambios</button>
+        <a href="{{ url_for('configuracion') }}">
+            <button type="button" style="background:#6b7280;">Cancelar</button>
+        </a>
+    </form>
+</div>
+{% endblock %}

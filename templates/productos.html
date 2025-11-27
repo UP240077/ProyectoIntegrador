@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t("products_title") }}{% endblock %}
+
+{% block content %}
+<div class="card center">
+    <h1>📦 {{ t("products_title") }}</h1>
+    <p>{{ t("products_desc") }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ t("products_table_id") }}</th>
+                <th>{{ t("products_table_name") }}</th>
+                <th>{{ t("products_table_category") }}</th>
+                <th>{{ t("products_table_price") }}</th>
+                <th>{{ t("products_table_quantity") }}</th>
+                <th>{{ t("products_table_actions") }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if productos %}
+                {% for p in productos %}
+                <tr>
+                    <td>{{ p[0] }}</td>
+                    <td>{{ p[1] }}</td>
+                    <td>{{ p[2] }}</td>
+                    <td>${{ "%.2f"|format(p[3]) }}</td>
+                    <td>{{ p[4] }}</td>
+                    <td>
+                        <form action="{{ url_for('eliminar_producto', id=p[0]) }}"
+                              method="POST" style="display:inline;">
+                            <button type="submit" style="background-color:#dc2626;">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6">{{ t("products_none") }}</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('nuevo_producto') }}">
+        <button id="btn-agregar">➕ {{ t("products_add_btn") }}</button>
+    </a>
+</div>
+{% endblock %}

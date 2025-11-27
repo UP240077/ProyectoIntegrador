@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t("new_report_title") }}{% endblock %}
+
+{% block content %}
+<div class="card center">
+    <h1>📝 {{ t("new_report_title") }}</h1>
+    <p>{{ t("new_report_desc") }}</p>
+
+    <form method="POST">
+        <div class="form-group">
+            <label>{{ t("new_report_label_type") }}</label><br>
+            <select name="tipo" required>
+                <option value="">{{ t("new_report_option_placeholder") }}</option>
+                <option value="Inventario">{{ t("new_report_option_inventory") }}</option>
+                <option value="Llegada de productos">{{ t("new_report_option_arrival") }}</option>
+                <option value="Otro">{{ t("new_report_option_other") }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>{{ t("new_report_label_desc") }}</label><br>
+            <textarea name="descripcion" rows="3" required></textarea>
+        </div>
+
+        <button type="submit" id="btn-generar">✅ {{ t("btn_save_report") }}</button>
+        <a href="{{ url_for('reportes') }}">
+            <button type="button" style="background:#6b7280;">{{ t("btn_cancel") }}</button>
+        </a>
+    </form>
+</div>
+{% endblock %}

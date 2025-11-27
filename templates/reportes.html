@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t("reports_title") }}{% endblock %}
+
+{% block content %}
+<div class="card center">
+    <h1>📊 {{ t("reports_title") }}</h1>
+    <p>{{ t("reports_desc") }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ t("reports_table_id") }}</th>
+                <th>{{ t("reports_table_type") }}</th>
+                <th>{{ t("reports_table_desc") }}</th>
+                <th>{{ t("reports_table_date") }}</th>
+                <th>{{ t("reports_table_action") }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if reportes %}
+                {% for r in reportes %}
+                <tr>
+                    <td>{{ r[0] }}</td>
+                    <td>{{ r[1] }}</td>
+                    <td>{{ r[2] }}</td>
+                    <td>{{ r[3] }}</td>
+                    <td>
+                        <form action="{{ url_for('eliminar_reporte', id=r[0]) }}"
+                              method="POST">
+                            <button type="submit" style="background:#dc2626;">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5">{{ t("reports_none") }}</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('nuevo_reporte') }}">
+        <button id="btn-generar">📝 {{ t("reports_add_btn") }}</button>
+    </a>
+</div>
+{% endblock %}

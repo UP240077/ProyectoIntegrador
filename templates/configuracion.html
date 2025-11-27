@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t("config_title") }}{% endblock %}
+
+{% block content %}
+<div class="card center">
+    <h1>⚙️ {{ t("config_title") }}</h1>
+    <p>{{ t("config_desc") }}</p>
+
+    <!-- Botón Cambiar idioma (ahora sólo desde aquí) -->
+    <a href="{{ url_for('cambiar_idioma') }}">
+        <button type="button">🌐 {{ t("config_change_language_btn") }}</button>
+    </a>
+
+    <!-- Botón Cuenta que despliega opciones -->
+    <br><br>
+    <button type="button" onclick="toggleCuenta()">👤 Cuenta</button>
+
+    <div id="opciones-cuenta" style="display:none; margin-top:15px;">
+        <p>Opciones de cuenta:</p>
+
+        <!-- Cerrar sesión -->
+        <a href="{{ url_for('logout') }}">
+            <button type="button">🔒 Cerrar sesión</button>
+        </a>
+
+        <!-- Cambiar nombre -->
+        <a href="{{ url_for('cambiar_nombre') }}">
+            <button type="button">✏️ Cambiar nombre</button>
+        </a>
+    </div>
+</div>
+
+<script>
+function toggleCuenta() {
+    const div = document.getElementById("opciones-cuenta");
+    if (div.style.display === "none" || div.style.display === "") {
+        div.style.display = "block";
+    } else {
+        div.style.display = "none";
+    }
+}
+</script>
+{% endblock %}
