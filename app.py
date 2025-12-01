@@ -4,7 +4,7 @@ import json
 import os
 from datetime import datetime
 
-titulo_sistema = "SisVentas - Version B"
+titulo_sistema = "SisVentas - Version Final"
 
 app = Flask(__name__)
 app.secret_key = "1234"  # cámbialo en producción
