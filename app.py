@@ -283,5 +283,3 @@ def logout():
 # -------------------------------------------------
 if __name__ == "__main__":
     app.run(debug=True)
-
-# Cambio desde feature/productos para generar PR
