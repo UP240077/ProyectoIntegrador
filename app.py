@@ -8,6 +8,12 @@ titulo_sistema = "SisVentas - Version Final"
 
 app = Flask(__name__)
 app.secret_key = "1234"  # cámbialo en producción
+# Cambio 1 para probar git add -p
+print("Este es el primer cambio para git add -p")
+
+# Cambio 2 para probar git add -p
+print("Este es el segundo cambio para git add -p")
+
 
 # -------------------------------------------------
 # CARGAR ARCHIVOS DE IDIOMA
